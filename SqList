@@ -1,0 +1,83 @@
+import sys
+class list:
+    def __init__(self):
+        self.data = 0
+        self.next = None
+
+def InitList (head) :
+    h = head
+    p = 5
+    while p != 0:
+        s = list()
+        s.data = p
+        s.next = h.next
+        h.next = s
+        p = p - 1
+    return h
+
+def PrintList(head):
+    h = head
+    h=h.next
+    while h:
+        print(h.data , end = ',')
+        h=h.next
+    print('')
+def InsertList(head):
+    num = int(input('请输入要插入的元素值：'))
+    pos = int(input('请输入要插入元素的位置：'))
+    new_node = list()
+    new_node.data = num
+    new_node.next = None
+    pos1 = 0
+    p = head
+    while p and pos1 < pos-1:
+        pos1 = pos1 + 1
+        p = p.next
+    if not p or pos1 < pos - 1:
+        print('插入位置不合法！')
+        sys.exit(0)
+    else:
+        new_node.next = p.next
+        p.next = new_node
+
+def DeleteList(head):
+    pos = int(input('请输入你要删除元素的位置：'))
+    p = head
+    pos1 = 0
+    while p and pos1 < pos-1:
+        pos1 = pos1 + 1
+        p = p.next
+    if not p or pos1 < pos - 1:
+        print('插入位置不合法！')
+        sys.exit(0)
+    else:
+        p.next = p.next.next
+def main () :
+    s = list()
+    p = InitList(s)
+    while True:
+        print('1:插入')
+        print('2:删除')
+        print('3:输出')
+        print('else:exit')
+        x = int(input('please select:'))
+        if x == 1:
+            print('插入前的链表元素为：')
+            PrintList(p)
+            InsertList(p)
+            print('插入后的链表元素为：')
+            PrintList(p)
+        elif x == 2:
+            print('删除前的链表元素为：')
+            PrintList(p)
+            DeleteList(p)
+            print('删除后的链表元素为：')
+            PrintList(p)
+        elif x == 3:
+            print('当前链表中的元素为：')
+            PrintList(p)
+        else:
+            break
+
+if __name__ == '__main__':
+    main()
